@@ -1,0 +1,12 @@
+services:
+  hetzner-ddns:
+    image: debian:bookworm
+    container_name: hetzner-ddns
+    build: .
+    volumes:
+      - ./log:/app/log
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep -f hetzner_ddns || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
